@@ -62,8 +62,3 @@ def get_db() -> mysql.connector.connection.MySQLConnection:
         user=usern,
         password=pwd)
     return conn
-
-
-def main():
-    ''''''
-    pass
