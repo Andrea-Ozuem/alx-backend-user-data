@@ -43,7 +43,7 @@ def get_logger() -> logging.Logger:
     '''returns a logging.Logger object'''
     logger = logging.getLogger('user_data')
     logger.propagate = False
-    logger.setLevel = logging.INFO
+    logger.setLevel(logging.INFO)
     hdlr = logging.StreamHandler()
     hdlr.setFormatter(RedactingFormatter(PII_FIELDS))
     logger.addHandler(hdlr)
@@ -53,12 +53,17 @@ def get_logger() -> logging.Logger:
 def get_db() -> mysql.connector.connection.MySQLConnection:
     '''returns a connector to the database'''
     pwd = os.environ.get("PERSONAL_DATA_DB_PASSWORD", "")
-    user = os.environ.get('PERSONAL_DATA_DB_USERNAME', "root")
+    usern = os.environ.get('PERSONAL_DATA_DB_USERNAME', "root")
     host = os.environ.get('PERSONAL_DATA_DB_HOST', 'localhost')
     db_name = os.environ.get('PERSONAL_DATA_DB_NAME')
     conn = mysql.connector.connect(
         host=host,
         database=db_name,
-        user=user,
+        user=usern,
         password=pwd)
     return conn
+
+
+def main():
+    ''''''
+    pass
