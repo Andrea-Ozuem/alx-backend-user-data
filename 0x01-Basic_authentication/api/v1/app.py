@@ -21,6 +21,9 @@ if auth_type == 'auth':
 
 @app.before_request
 def before():
+    '''
+    handler before_request
+    '''
     if auth is None:
         return
     required = auth.require_auth(request.path, ['/api/v1/status/',
