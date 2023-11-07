@@ -16,7 +16,9 @@ class Auth:
             return True
         if path[-1] != '/':
             path = path + '/'
-        return True if path not in excluded_paths else False
+        if path not in excluded_paths:
+            return True
+        return False
 
     def authorization_header(self, request=None) -> str:
         '''validate all requests to secure the API
