@@ -46,7 +46,7 @@ class BasicAuth(Auth):
            type(decoded_base64_authorization_header) != str or \
            ':' not in decoded_base64_authorization_header:
             return None, None
-        return decoded_base64_authorization_header.split(':')
+        return decoded_base64_authorization_header.split(':', maxsplit=1)
 
     def user_object_from_credentials(
         self,
@@ -63,6 +63,7 @@ class BasicAuth(Auth):
             return None
         if not u:
             return None
+        print(u)
         if u.is_valid_password(user_pwd):
             return u
         return None
@@ -74,5 +75,4 @@ class BasicAuth(Auth):
             extracted = self.extract_base64_authorization_header(header)
             u_cred = self.decode_base64_authorization_header(extracted)
             email, pwd = self.extract_user_credentials(u_cred)
-            user = self.user_object_from_credentials(email, pwd)
-            return user
+            return self.user_object_from_credentials(email, pwd)
