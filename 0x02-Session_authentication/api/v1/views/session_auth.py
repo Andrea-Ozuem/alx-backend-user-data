@@ -32,7 +32,13 @@ def sess_login() -> str:
 @app_views.route('/auth_session/logout', methods=['DELETE'],
                  strict_slashes=False)
 def sess_logout() -> str:
-    '''Handles user'session logout'''
+    """ DELETE /api/v1/auth_session/logout
+    Path parameter:
+      - None
+    Return:
+      - empty JSON is the session has been correctly deleted
+      - 404 if the Session ID doesn't exist
+    """
     from api.v1.app import auth
     deleted = auth.destroy_session(request)
     if deleted is False:
