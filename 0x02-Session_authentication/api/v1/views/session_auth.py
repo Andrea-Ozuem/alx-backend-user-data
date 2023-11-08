@@ -18,7 +18,7 @@ def sess_login() -> str:
         return jsonify({"error": "password missing"}), 400
     u = User.search({'email': email})
     if not u:
-        return jsonify({"error": "no user found for this email"}), 400
+        return jsonify({"error": "no user found for this email"}), 404
     u = u[0]
     if not u.is_valid_password(pwd):
         return jsonify({"error": "wrong password"}), 401
