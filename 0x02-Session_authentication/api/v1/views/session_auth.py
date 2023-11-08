@@ -1,9 +1,10 @@
 #!/usr/bin/env python3
-""" Module of Users views
+""" Module for Session views
 """
 from api.v1.views import app_views
-from flask import abort, jsonify, request
+from flask import jsonify, request
 from models.user import User
+import os
 
 
 @app_views.route('/auth_session/login', methods=['POST'], strict_slashes=False)
@@ -24,5 +25,5 @@ def sess_login() -> str:
     from api.v1.app import auth
     sess_id = auth.create_session(u.id)
     res = jsonify(u.to_json())
-    res.set_cookie('SESSION_NAME', sess_id)
+    res.set_cookie(os.getenv('SESSION_NAME'), sess_id)
     return res
