@@ -6,6 +6,8 @@ from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.orm.session import Session
 from user import Base, User
+from sqlalchemy.orm.exc import NoResultFound
+from sqlalchemy.exc import InvalidRequestError
 
 
 class DB:
@@ -35,4 +37,13 @@ class DB:
         user = User(email=email, hashed_password=hashed_password)
         session.add(user)
         session.commit()
+        return user
+
+    def find_user_by(self, **kwargs) -> User:
+        """takes in arbitrary keyword arguments and returns the
+        first row found in the users table"""
+        session = self._session
+        user = session.query(User).filter_by(**kwargs).first()
+        if user is None:
+            raise NoResultFound
         return user
