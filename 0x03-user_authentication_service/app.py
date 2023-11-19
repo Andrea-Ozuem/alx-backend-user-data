@@ -40,6 +40,7 @@ def login() -> str:
     res.set_cookie('session_id', sess_id)
     return res
 
+
 @app.route('/sessions', methods=['DELETE'], strict_slashes=False)
 def logout() -> str:
     '''logout of a session'''
@@ -50,6 +51,7 @@ def logout() -> str:
         return redirect('/')
     else:
         abort(403)
+
 
 @app.route('/profile', strict_slashes=False)
 def profile() -> str:
