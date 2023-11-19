@@ -1,14 +1,15 @@
 #!/usr/bin/env python3
 'Flask app module'
 
-from flask import Flask, jsonofy, request
+from flask import Flask, jsonify, request
 
 app = Flask(__name__)
 
 
-def index('/', strict_slashes=False) -> str:
+@app.route('/', strict_slashes=False)
+def index() -> str:
     '''return a JSON payload of the form'''
-    return jsonify({"message": "Bienvenue"}), 200
+    return jsonify({"message": "Bienvenue"})
 
 
 if __name__ == "__main__":
